@@ -28,6 +28,7 @@ public class Constants {
     public static int STATUS_FAIL = 0;
     // Message
     public static String SUCCESS = "success";
+    public static String ERROR = "ERROR";
     public static String STORE_NAME = "VSS Store";
     public static String NOT_FOUND = "Product is not found";
     public static String NOTIFICATION_ERROR_LOGIN = "Email or password is incorrect.!";

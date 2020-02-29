@@ -20,6 +20,10 @@
         <servlet-name>BillServlet</servlet-name>
         <servlet-class>controller.BillServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>controller.ProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckAccountServlet</servlet-name>
         <url-pattern>/CheckAccountServlet</url-pattern>
@@ -35,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>BillServlet</servlet-name>
         <url-pattern>/BillServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/ProductServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
