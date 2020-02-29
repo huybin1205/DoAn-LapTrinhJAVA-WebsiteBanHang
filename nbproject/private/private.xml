@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/web/layout/header.jsp</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/constants/AppConfig.java</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/model/Bill.java</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/controller/BillServlet.java</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/dao/BillDAO.java</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/dao/SendMailDAO.java</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/dao/FileDAO.java</file>
+        </group>
+    </open-files>
+</project-private>
