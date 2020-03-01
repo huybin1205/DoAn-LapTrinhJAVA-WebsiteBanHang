@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/web/admin/products.jsp</file>
-            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/controller/ProductServlet.java</file>
-            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/web/product-detail.jsp</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/controller/CartServlet.java</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/web/admin/products-detail.jsp</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/controller/BillServlet.java</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/controller/CheckAccountServlet.java</file>
             <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/dao/ProductDAO.java</file>
-            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/constants/Constants.java</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/controller/UsersServlet.java</file>
+            <file>file:/C:/Users/HuyBin/Documents/NetBeansProjects/WebsiteBanHang-Java/src/java/controller/ProductUploadServlet.java</file>
         </group>
     </open-files>
 </project-private>

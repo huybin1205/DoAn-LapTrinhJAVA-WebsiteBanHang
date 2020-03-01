@@ -13,7 +13,8 @@
             <script>
                 $(document).ready(function () {
                     $('.product-item').click(function () {
-//                        alert($(this).attr('product-id'));
+                        id = $(this).attr('product-id');
+                        window.location.href = '../admin/products-detail.jsp?productID='+id;
                     });
 
                     $('.btnDelete').click(function () {
@@ -50,6 +51,10 @@
                     function sleep(ms) {
                         return new Promise(resolve => setTimeout(resolve, ms));
                     }
+                    
+                    $('#btnAddItem').click(function(){
+                        window.location.href = '../admin/products-detail.jsp';
+                    });
                 })
             </script>
         </head>
@@ -106,7 +111,7 @@
                                                     <i class="zmdi zmdi-filter-list"></i>filters</button>
                                             </div>
                                             <div class="table-data__tool-right">
-                                                <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                                <button id="btnAddItem" class="au-btn au-btn-icon au-btn--green au-btn--small">
                                                     <i class="zmdi zmdi-plus"></i>add item</button>
                                                 <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                                     <select class="js-select2" name="type">

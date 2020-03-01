@@ -63,7 +63,7 @@
                                 <i class="fas fa-table"></i>Order</a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="../admin/products.jsp">
                                 <i class="far fa-check-square"></i>Product</a>
                         </li>
                         <li>

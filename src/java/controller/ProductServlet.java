@@ -7,16 +7,21 @@ package controller;
 
 import connect.DBConnect;
 import dao.ProductDAO;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Product;
 
 /**
  *
@@ -51,24 +56,50 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int productID = -1;
-        if (request.getParameter("productID") == null && request.getParameter("command") == null) {
+        String url = "";
+        RequestDispatcher rd;
+
+        if (request.getParameter("command").compareTo("") == 0 || request.getParameter("command") == null) {
+            url = "/admin/products-detail.jsp";
+            rd = getServletContext().getRequestDispatcher(url);
+            rd.forward(request, response);
             return;
         }
-        productID = Integer.parseInt(request.getParameter("productID"));
+
         String command = request.getParameter("command");
 
         switch (command) {
             case "remove":
+                int productID = -1;
+                if (request.getParameter("productID") != null) {
+                    productID = Integer.parseInt(request.getParameter("productID"));
+
+                    try {
+                        if (removeProduct(productID)) {
+                            response.getWriter().write(constants.Constants.SUCCESS);
+                            return;
+//                            break;
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ProductServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                response.getWriter().write(constants.Constants.ERROR);
+                break;
+            case "insert":
                 try {
-                    if (removeProduct(productID)) {
-                        response.getWriter().write(constants.Constants.SUCCESS);
-                        break;
+                    if (insertProduct(request)) {
+                        url = "/admin/products.jsp";
+                        rd = getServletContext().getRequestDispatcher(url);
+                        rd.forward(request, response);
+                    } else {
+                        url = request.getRequestURI();
+                        rd = getServletContext().getRequestDispatcher(url);
+                        rd.forward(request, response);
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(ProductServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response.getWriter().write(constants.Constants.ERROR);
                 break;
         }
     }
@@ -90,4 +121,34 @@ public class ProductServlet extends HttpServlet {
         return false;
     }
 
+    private boolean insertProduct(HttpServletRequest request) throws SQLException {
+        Connection c = DBConnect.getConnection();
+        try {
+            c.setAutoCommit(false);
+            Product p = new Product();
+            p.setCategoryID(Integer.parseInt(request.getParameter("categoryID")));
+            p.setProducerID(Integer.parseInt(request.getParameter("producerID")));
+            p.setProductName(request.getParameter("productName"));
+            p.setProductDescription(request.getParameter("productDescription"));
+            p.setProductColor(request.getParameter("productColor"));
+            p.setProductTitle(request.getParameter("productTitle"));
+            p.setInventoryNumber(Integer.parseInt(request.getParameter("productInventoryNumber")));
+            p.setProductSize(request.getParameter("productSize"));
+            p.setProductPrice(Integer.parseInt(request.getParameter("productPrice")));
+            p.setUpdateDate(Date.valueOf(LocalDate.now()));
+            p.setProductImage("/Product/" + request.getParameter("productImage"));
+            p.setQuantitySold(0);
+
+            if (productDAO.insertProduct(p)) {
+
+                c.commit();
+                return true;
+            }
+        } catch (Exception e) {
+            c.rollback();
+        }
+        c.rollback();
+        c.close();
+        return false;
+    }
 }

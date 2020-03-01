@@ -8,12 +8,17 @@ package dao;
 import connect.DBConnect;
 import constants.Constants;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Product;
+import model.Users;
 
 /**
  *
@@ -441,7 +446,7 @@ public class ProductDAO {
         // Return
         return list;
     }
-    
+
     public boolean deleteProduct(int id) throws SQLException {
         // Create an variable save the result
         boolean result = false;
@@ -449,10 +454,10 @@ public class ProductDAO {
             // Connect to database
             Connection connection = DBConnect.getConnection();
             // String query
-            String sql = "DELETE FROM giay WHERE MaGiay="+id;
+            String sql = "DELETE FROM giay WHERE MaGiay=" + id;
             // Processing query
             PreparedStatement ps = connection.prepareCall(sql);
-            result = ps.executeUpdate()> 0;
+            result = ps.executeUpdate() > 0;
         } catch (Exception e) {
             result = false;
         }
@@ -460,9 +465,73 @@ public class ProductDAO {
         return result;
     }
 
+    public boolean insertProduct(Product p) {
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "INSERT INTO giay (MaDM, MaNSX, TenGiay, TieuDe, Mota, Size, Mau, Anhbia, Giaban, NgayCapNhat, SoLuongBan, SoLuongTon) VALUES(?,?,?,?,?,?,?,?,?,STR_TO_DATE(?,'%Y-%m-%d'),?,?)";
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setInt(1, p.getCategoryID());
+            ps.setInt(2, p.getProducerID());
+            ps.setString(3, p.getProductName());
+            ps.setString(4, p.getProductTitle());
+            ps.setString(5, p.getProductDescription());
+            ps.setString(6, p.getProductSize());
+            ps.setString(7, p.getProductColor());
+            ps.setString(8, p.getProductImage());
+            ps.setInt(9, p.getProductPrice());
+            ps.setDate(10, (Date) p.getUpdateDate());
+            ps.setInt(11, p.getQuantitySold());
+            ps.setInt(12, p.getInventoryNumber());
+            ps.executeUpdate();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        // Return
+        return false;
+    }
+    
+    public boolean updateProduct(Product p) {
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "UPDATE giay SET MaDM=?, MaNSX=?, TenGiay=?, TieuDe=?, Mota=?, Size=?, Mau=?, Anhbia=?, Giaban=?, NgayCapNhat=STR_TO_DATE(?,'%Y-%m-%d'), SoLuongBan=?, SoLuongTon=? WHERE MaGiay=?";
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setInt(1, p.getCategoryID());
+            ps.setInt(2, p.getProducerID());
+            ps.setString(3, p.getProductName());
+            ps.setString(4, p.getProductTitle());
+            ps.setString(5, p.getProductDescription());
+            ps.setString(6, p.getProductSize());
+            ps.setString(7, p.getProductColor());
+            ps.setString(8, p.getProductImage());
+            ps.setInt(9, p.getProductPrice());
+            ps.setDate(10, (Date) p.getUpdateDate());
+            ps.setInt(11, p.getQuantitySold());
+            ps.setInt(12, p.getInventoryNumber());
+            ps.setInt(13, p.getProductID());
+            ps.executeUpdate();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        // Return
+        return false;
+    }
+
     // Test
     public static void main(String[] args) throws SQLException {
         ProductDAO productDAO = new ProductDAO();
-        productDAO.deleteProduct(10);
+        boolean isUpdate = productDAO.updateProduct(new Product(126,1,1,"name","title","description","M","Red","/image/",11111,Date.valueOf(LocalDate.now()),1,1));
+        System.out.println(isUpdate);
     }
 }

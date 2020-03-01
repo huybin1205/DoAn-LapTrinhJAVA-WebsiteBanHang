@@ -47,11 +47,11 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fas fa-shopping-basket"></i>eCommerce</a>
+                        <i class="fas fa-shopping-basket">Features</i></a>
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-trophy"></i>Features
+                        <i class="fas fa-trophy"></i>eCommerce
                         <span class="arrow">
                             <i class="fas fa-angle-down"></i>
                         </span>
@@ -59,19 +59,19 @@
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
                             <a href="table.html">
-                                <i class="fas fa-table"></i>Tables</a>
+                                <i class="fas fa-table"></i>Order</a>
                         </li>
                         <li>
-                            <a href="form.html">
-                                <i class="far fa-check-square"></i>Forms</a>
+                            <a href="../admin/products.jsp">
+                                <i class="far fa-check-square"></i>Product</a>
                         </li>
                         <li>
                             <a href="calendar.html">
-                                <i class="fas fa-calendar-alt"></i>Calendar</a>
+                                <i class="fas fa-calendar-alt"></i>Category</a>
                         </li>
                         <li>
                             <a href="map.html">
-                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                                <i class="fas fa-map-marker-alt"></i>Producers</a>
                         </li>
                     </ul>
                 </li>
