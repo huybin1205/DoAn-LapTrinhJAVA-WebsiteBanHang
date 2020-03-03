@@ -14,7 +14,7 @@
         </div>
         <nav class="navbar-sidebar2">
             <ul class="list-unstyled navbar__list">
-                <li class="active has-sub">
+<!--                <li class="active has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-tachometer-alt"></i>Dashboard
                         <span class="arrow">
@@ -48,7 +48,7 @@
                 <li>
                     <a href="#">
                         <i class="fas fa-shopping-basket">Features</i></a>
-                </li>
+                </li>-->
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-trophy"></i>eCommerce
@@ -66,7 +66,7 @@
                                 <i class="far fa-check-square"></i>Product</a>
                         </li>
                         <li>
-                            <a href="calendar.html">
+                            <a href="../admin/category.jsp">
                                 <i class="fas fa-calendar-alt"></i>Category</a>
                         </li>
                         <li>
@@ -75,7 +75,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="has-sub">
+<!--                <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-copy"></i>Pages
                         <span class="arrow">
@@ -150,7 +150,7 @@
                                 <i class="fas fa-font"></i>Typography</a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
             </ul>
         </nav>
     </div>

@@ -92,17 +92,17 @@ public class CategoryDAO {
         return false;
     }
     
-    public boolean updateProduct(Category c) {
+    public boolean updateCategory(Category c) {
         try {
             // Connect to database
             Connection connection = DBConnect.getConnection();
             // String query
-            String sql = "UPDATE danhmuc SET TenDM=?, Images=? WHERE MaDM=?";
+            String sql = "UPDATE danhmuc SET TenDM=?, Images=? WHERE MaDM = ?";
             // Processing query
             PreparedStatement ps = connection.prepareCall(sql);
             ps.setString(1, c.getCategoryName());
             ps.setString(2, c.getCategoryImage());
-            ps.setInt(1, c.getCategoryId());
+            ps.setInt(3, c.getCategoryId());
             ps.executeUpdate();
             connection.close();
             return true;
@@ -135,9 +135,10 @@ public class CategoryDAO {
     // Test
     public static void main(String[] args) throws SQLException {
         CategoryDAO categoryDAO = new CategoryDAO();
-//        for (Category ds : categoryDAO.getListCategory()) {
-//            System.out.println(ds.toString());
-//        }
-        System.out.println(categoryDAO.getCategoryByID(1).toString());
+        Category c=  new Category();
+        c.setCategoryName("Đồng hồ");
+        c.setCategoryImage("");
+        categoryDAO.updateCategory(c);
+//        System.out.println(categoryDAO.getCategoryByID(1).toString());
     }
 }

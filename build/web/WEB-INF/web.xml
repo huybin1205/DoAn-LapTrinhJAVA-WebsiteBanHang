@@ -28,6 +28,10 @@
         <servlet-name>ProductUploadServlet</servlet-name>
         <servlet-class>controller.ProductUploadServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CategoryServlet</servlet-name>
+        <servlet-class>controller.CategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckAccountServlet</servlet-name>
         <url-pattern>/CheckAccountServlet</url-pattern>
@@ -51,6 +55,10 @@
     <servlet-mapping>
         <servlet-name>ProductUploadServlet</servlet-name>
         <url-pattern>/ProductUploadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryServlet</servlet-name>
+        <url-pattern>/CategoryServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
