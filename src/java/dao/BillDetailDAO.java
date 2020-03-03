@@ -8,10 +8,13 @@ package dao;
 import connect.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.BillDetail;
+import model.Category;
 
 /**
  *
@@ -39,6 +42,52 @@ public class BillDetailDAO {
         }
         // Return
         return false;
+    }
+     
+     public ArrayList<BillDetail> getListBillDetailByID(int id) {
+        ArrayList<BillDetail> list = new ArrayList<>();
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "SELECT * FROM chitietdonhang WHERE MaDonHang=" + id;
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                BillDetail b = new BillDetail();
+                // data from the database
+                b.setBillDetailID(rs.getInt("ID"));
+                b.setBillID(rs.getInt("MaDonHang"));
+                b.setProductID(rs.getInt("MaGiay"));
+                b.setBillQuantity(rs.getInt("SoLuong"));
+                b.setBillPrice(rs.getInt("DonGia"));
+                
+                list.add(b);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Return
+        return list;
+    }
+     
+    public boolean deleteBillDetail(int BillId) throws SQLException {
+        // Create an variable save the result
+        boolean result = false;
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "DELETE FROM chitietdonhang WHERE MaDonHang=" + BillId;
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            result = ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            result = false;
+        }
+        // Return
+        return result;
     }
     
     public static void main(String[] args){

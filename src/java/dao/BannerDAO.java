@@ -11,7 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Banner;
+import model.Producer;
 import model.Product;
 
 /**
@@ -49,8 +52,75 @@ public class BannerDAO {
         // Return
         return list;
     }
-    
-    public static void main(String[] args) throws SQLException{
+
+    public boolean deleteBanner(int id) throws SQLException {
+        // Create an variable save the result
+        boolean result = false;
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "DELETE FROM banner WHERE MaBanner=" + id;
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            result = ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            result = false;
+        }
+        // Return
+        return result;
+    }
+
+    public boolean insertBanner(Banner b) {
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "INSERT INTO cuahang (TenBanner, MoTaBanner, Images, Link) VALUES(?,?,?,?)";
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setString(1, b.getBannerName());
+            ps.setString(2, b.getBannerDescription());
+            ps.setString(3, b.getBannerImage());
+            ps.setString(4, b.getBannerLink());
+
+            ps.executeUpdate();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        // Return
+        return false;
+    }
+
+    public boolean updateProducer(Banner b) {
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "UPDATE banner SET TenBanner=?, MoTaBanner=?, Images=?, Link=? WHERE MaBanner=?";
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setString(1, b.getBannerName());
+            ps.setString(2, b.getBannerDescription());
+            ps.setString(3, b.getBannerImage());
+            ps.setString(4, b.getBannerLink());
+            ps.setInt(5, b.getBannerID());
+
+            ps.executeUpdate();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        // Return
+        return false;
+    }
+
+    public static void main(String[] args) throws SQLException {
         BannerDAO bannerDAO = new BannerDAO();
 //        System.out.println(bannerDAO.getBanner(3).toString());
     }

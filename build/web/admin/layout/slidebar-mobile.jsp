@@ -58,7 +58,7 @@
                     </a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="table.html">
+                            <a href="../admin/orders.jsp">
                                 <i class="fas fa-table"></i>Order</a>
                         </li>
                         <li>

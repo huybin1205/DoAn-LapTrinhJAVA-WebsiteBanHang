@@ -13,13 +13,15 @@ public class Category {
 
     private int categoryId;
     private String categoryName;
+    private String categoryImage;
 
     public Category() {
     }
 
-    public Category(int categoryId, String categoryName) {
+    public Category(int categoryId, String categoryName, String categoryImage) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
+        this.categoryImage = categoryImage;
     }
 
     public int getCategoryId() {
@@ -38,9 +40,19 @@ public class Category {
         this.categoryName = categoryName;
     }
 
+    public String getCategoryImage() {
+        return categoryImage;
+    }
+
+    public void setCategoryImage(String categoryImage) {
+        this.categoryImage = categoryImage;
+    }
+
     @Override
     public String toString() {
-        return "Category{" + "categoryId=" + categoryId + ", categoryName=" + categoryName + '}';
+        return "Category{" + "categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryImage=" + categoryImage + '}';
     }
+    
+    
 
 }

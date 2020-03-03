@@ -70,7 +70,8 @@ public class BillServlet extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         String phonenumber = request.getParameter("phonenumber");
-        
+        int billID = Integer.parseInt(request.getParameter("billID"));
+
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null) {
             cart = new Cart();
@@ -88,14 +89,18 @@ public class BillServlet extends HttpServlet {
                 case "insert":
                     // insert bill
                     if (insertBillFromCart(cart, address, email, phonenumber, user.getUserID(), request)) {
-
                         // Clear cart
                         cart = new Cart();
                         session.setAttribute("cart", cart);
                         response.getWriter().write("success");
-                        
-                    }
 
+                    }
+                    break;
+                case "remove":
+                    // remove bill
+                    if(removeBill(billID)){
+                        response.getWriter().write("success");
+                    }
                     break;
             }
         } catch (Exception e) {
@@ -117,7 +122,7 @@ public class BillServlet extends HttpServlet {
         b.setBillStatus(0);
         b.setBillOrderDate(Date.valueOf(LocalDate.now()));
         b.setUserID(userID);
-        
+
         // Send mail
         sendMailDAO.sendMail(email, b, request);
 
@@ -148,15 +153,36 @@ public class BillServlet extends HttpServlet {
             BillDetail bd = new BillDetail();
             bd.setBillID(b.getBillID());
             bd.setBillQuantity(c.getQuantity());
-            bd.setBillPrice(c.getQuantity()*c.getProduct().getProductPrice());
+            bd.setBillPrice(c.getQuantity() * c.getProduct().getProductPrice());
             bd.setProductID(c.getProduct().getProductID());
 
             // Proccessing
             result = billDetailDAO.insertBillDetail(bd);
-            if(result == false){
+            if (result == false) {
                 break;
             }
         }
         return result;
+    }
+
+    private boolean removeBill(int billID) throws SQLException {
+        Connection connection = DBConnect.getConnection();
+        connection.setAutoCommit(false);
+
+        //Proccesing
+        try {
+            if (billDAO.deleteBill(billID)) {
+                // Insert bill detail
+                if (billDetailDAO.deleteBillDetail(billID)) {
+                    return true;
+                }
+            }
+            connection.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            connection.rollback();
+        }
+        connection.close();
+        return false;
     }
 }

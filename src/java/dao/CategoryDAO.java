@@ -7,11 +7,15 @@ package dao;
 
 import connect.DBConnect;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Category;
+import model.Product;
 
 /**
  *
@@ -65,6 +69,67 @@ public class CategoryDAO {
         }
         // Return
         return c;
+    }
+    
+    public boolean insertCategory(Category c) {
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "INSERT INTO danhmuc (TenDM, Images) VALUES(?,?)";
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setString(1, c.getCategoryName());
+            ps.setString(2, c.getCategoryImage());
+            ps.executeUpdate();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        // Return
+        return false;
+    }
+    
+    public boolean updateProduct(Category c) {
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "UPDATE danhmuc SET TenDM=?, Images=? WHERE MaDM=?";
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setString(1, c.getCategoryName());
+            ps.setString(2, c.getCategoryImage());
+            ps.setInt(1, c.getCategoryId());
+            ps.executeUpdate();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        // Return
+        return false;
+    }
+    
+    public boolean deleteCategory(int id) throws SQLException {
+        // Create an variable save the result
+        boolean result = false;
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "DELETE FROM danhmuc WHERE MaDM=" + id;
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            result = ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            result = false;
+        }
+        // Return
+        return result;
     }
 
     // Test

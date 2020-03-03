@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Producer;
 
 /**
@@ -47,6 +49,71 @@ public class ProducerDAO {
         }
         // Return
         return list;
+    }
+    
+    public boolean deleteProducer(int id) throws SQLException {
+        // Create an variable save the result
+        boolean result = false;
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "DELETE FROM nhasanxuat WHERE MaNSX=" + id;
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            result = ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            result = false;
+        }
+        // Return
+        return result;
+    }
+
+    public boolean insertProducer(Producer p) {
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "INSERT INTO cuahang (TenNSX, Diachi, DienThoai) VALUES(?,?,?)";
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setString(1, p.getProducerName());
+            ps.setString(2, p.getProducerAddress());
+            ps.setString(3, p.getProducerPhonenumber());
+
+            ps.executeUpdate();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        // Return
+        return false;
+    }
+
+    public boolean updateProducer(Producer p) {
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "UPDATE nhasanxuat SET TenNSX=?, Diachi=?, DienThoai=? WHERE MaNSX=?";
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            ps.setString(1, p.getProducerName());
+            ps.setString(2, p.getProducerAddress());
+            ps.setString(3, p.getProducerPhonenumber());
+            ps.setInt(4, p.getProducerID());
+
+            ps.executeUpdate();
+            connection.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        // Return
+        return false;
     }
     
     public static void main(String[] args) throws SQLException{
