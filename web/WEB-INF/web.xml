@@ -32,6 +32,10 @@
         <servlet-name>CategoryServlet</servlet-name>
         <servlet-class>controller.CategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProducerServlet</servlet-name>
+        <servlet-class>controller.ProducerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckAccountServlet</servlet-name>
         <url-pattern>/CheckAccountServlet</url-pattern>
@@ -59,6 +63,10 @@
     <servlet-mapping>
         <servlet-name>CategoryServlet</servlet-name>
         <url-pattern>/CategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProducerServlet</servlet-name>
+        <url-pattern>/ProducerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -68,13 +68,39 @@ public class ProducerDAO {
         // Return
         return result;
     }
+    
+    public Producer getProducer(int id) throws SQLException {
+        // Create a object save the result
+
+        Producer p = new Producer();
+        try {
+            // Connect to database
+            Connection connection = DBConnect.getConnection();
+            // String query
+            String sql = "SELECT * FROM nhasanxuat WHERE MaNSX=" + id;
+            // Processing query
+            PreparedStatement ps = connection.prepareCall(sql);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            // Save data from the database
+            p.setProducerID(rs.getInt("MaNSX"));
+            p.setProducerName(rs.getString("TenNSX"));
+            p.setProducerAddress(rs.getString("Diachi"));
+            p.setProducerPhonenumber(rs.getString("DienThoai"));
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        // Return
+        return p;
+    }
 
     public boolean insertProducer(Producer p) {
         try {
             // Connect to database
             Connection connection = DBConnect.getConnection();
             // String query
-            String sql = "INSERT INTO cuahang (TenNSX, Diachi, DienThoai) VALUES(?,?,?)";
+            String sql = "INSERT INTO nhasanxuat (TenNSX, Diachi, DienThoai) VALUES(?,?,?)";
             // Processing query
             PreparedStatement ps = connection.prepareCall(sql);
             ps.setString(1, p.getProducerName());
