@@ -70,7 +70,10 @@ public class BillServlet extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         String phonenumber = request.getParameter("phonenumber");
-        int billID = Integer.parseInt(request.getParameter("billID"));
+        int billID = 0;
+        if (request.getParameter("billID") != null) {
+            billID = Integer.parseInt(request.getParameter("billID"));
+        }
 
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null) {
@@ -98,7 +101,7 @@ public class BillServlet extends HttpServlet {
                     break;
                 case "remove":
                     // remove bill
-                    if(removeBill(billID)){
+                    if (removeBill(billID)) {
                         response.getWriter().write("success");
                     }
                     break;
@@ -124,7 +127,7 @@ public class BillServlet extends HttpServlet {
         b.setUserID(userID);
 
         // Send mail
-        sendMailDAO.sendMail(email, b, request);
+//        sendMailDAO.sendMail(email, b, request);
 
         Connection connection = DBConnect.getConnection();
         connection.setAutoCommit(false);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 31, 2020 at 05:49 AM
+-- Generation Time: Jun 25, 2020 at 11:31 AM
 -- Server version: 10.5.2-MariaDB
 -- PHP Version: 7.3.8
 
@@ -110,7 +110,8 @@ INSERT INTO `chitietdonhang` (`MaDonHang`, `MaGiay`, `Soluong`, `DonGia`) VALUES
 (1, 13, 1, '800000'),
 (2, 13, 2, '800000'),
 (1002, 13, 1, '800000'),
-(1002, 59, 1, '950000');
+(1002, 59, 1, '950000'),
+(1593083457, 25, 1, '1200000');
 
 -- --------------------------------------------------------
 
@@ -173,17 +174,23 @@ CREATE TABLE `dondathang` (
   `TinhTrangGiaoHang` tinyint(4) DEFAULT NULL,
   `NgayDat` datetime(3) DEFAULT NULL,
   `NgayGiao` datetime(3) DEFAULT NULL,
-  `MaKH` int(11) DEFAULT NULL
+  `MaKH` int(11) DEFAULT NULL,
+  `DiaChi` varchar(200) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `SoDienThoai` varchar(50) NOT NULL,
+  `TongTien` int(11) NOT NULL,
+  `TinhTrangDonHang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `dondathang`
 --
 
-INSERT INTO `dondathang` (`MaDonHang`, `DaThanhToan`, `TinhTrangGiaoHang`, `NgayDat`, `NgayGiao`, `MaKH`) VALUES
-(1, 0, 0, '2019-03-26 22:54:56.977', NULL, 2),
-(2, 0, 0, '2019-03-28 20:55:07.027', NULL, 2),
-(1002, 0, 0, '2019-03-29 10:17:40.393', NULL, 2);
+INSERT INTO `dondathang` (`MaDonHang`, `DaThanhToan`, `TinhTrangGiaoHang`, `NgayDat`, `NgayGiao`, `MaKH`, `DiaChi`, `Email`, `SoDienThoai`, `TongTien`, `TinhTrangDonHang`) VALUES
+(1, 0, 0, '2019-03-26 22:54:56.977', NULL, 2, '', '', '', 0, 0),
+(2, 0, 0, '2019-03-28 20:55:07.027', NULL, 2, '', '', '', 0, 0),
+(1002, 0, 0, '2019-03-29 10:17:40.393', NULL, 2, '', '', '', 0, 0),
+(1593083457, NULL, NULL, '2020-06-25 00:00:00.000', NULL, 0, '3139  Doctors Drive', 'huyprosoccer@gmail.com', '+843103413588', 1200000, 0);
 
 -- --------------------------------------------------------
 
@@ -489,7 +496,7 @@ ALTER TABLE `danhmuc`
 -- AUTO_INCREMENT for table `dondathang`
 --
 ALTER TABLE `dondathang`
-  MODIFY `MaDonHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
+  MODIFY `MaDonHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1593083458;
 
 --
 -- AUTO_INCREMENT for table `giay`

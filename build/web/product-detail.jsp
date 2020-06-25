@@ -23,9 +23,9 @@
     if (c == null) {
         c = new Category();
     }
-    
+
     Cart cart = (Cart) session.getAttribute("cart");
-    if(cart == null){
+    if (cart == null) {
         cart = new Cart();
         session.setAttribute("cart", cart);
     }
@@ -33,8 +33,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><%= constants.Constants.STORE_NAME %>: <%=p.getProductName()%></title>
+        <title><%= constants.Constants.STORE_NAME%>: <%=p.getProductName()%></title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <style>
+            #btnAddToCartItem{
+                cursor: pointer;
+            }
+        </style>
         <jsp:include page="layout/script-header.jsp"></jsp:include>
 
             <script>
@@ -42,7 +47,7 @@
                     $('#btnAddToCart').click(async function () {
                         var nameProduct = '<%= p.getProductName()%>';
                         var quantity = $('#quantity').val();
-                        $.post('CartServlet', {'command': 'plus','quantity': quantity, 'productID': <%= p.getProductID()%>}, function (data) {
+                        $.post('CartServlet', {'command': 'plus', 'quantity': quantity, 'productID': <%= p.getProductID()%>}, function (data) {
                             if (data === 'success') {
                                 swal(nameProduct, "is added to cart !", "success");
                             } else {
@@ -52,11 +57,27 @@
                         await sleep(1500);
                         window.location.href = window.location;
                     });
-                    
+
+                    $('.btnAddToCartItem').click(async function () {
+                        var nameProduct = $(this).attr('product-name');
+                        var id = $(this).attr('product-id');
+                        $.post('CartServlet', {'command': 'plus', 'quantity': 1, 'productID': id}, function (data) {
+                            if (data === 'success') {
+                                swal(nameProduct, "is added to cart !", "success");
+                            } else {
+                                swal(nameProduct, "isn't added to cart !", "error");
+                            }
+                        });
+                        await sleep(1500);
+                        window.location.href = window.location;
+                    });
+
+
+
                     function sleep(ms) {
                         return new Promise(resolve => setTimeout(resolve, ms));
                     }
-                })
+                });
         </script>
     </head>
     <body class="animsition">
@@ -147,7 +168,7 @@
                                         <div class="rs1-select2 bor8 bg0">
                                             <select class="js-select2" name="time">
                                                 <option>Choose an option</option>
-                                                <option>Size <%= p.getProductSize() %></option>
+                                                <option>Size <%= p.getProductSize()%></option>
                                             </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>
@@ -163,7 +184,7 @@
                                         <div class="rs1-select2 bor8 bg0">
                                             <select class="js-select2" name="time">
                                                 <option>Choose an option</option>
-                                                <option><%= p.getProductColor() %></option>
+                                                <option><%= p.getProductColor()%></option>
                                             </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>
@@ -425,11 +446,11 @@
                             <div class="block2">
                                 <div class="block2-pic hov-img0">
                                     <img src="images/<%= product.getProductImage()%>" alt="<%= product.getProductName()%>">
-
-                                    <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                        Quick View
-                                    </a>
+                                    <div id="btnAddToCartItem" product-id="<%= product.getProductID()%>" product-name="<%= product.getProductName()%>" stlye="cursor:pointer" class="btnAddToCartItem block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+                                        Add to cart
+                                    </div>
                                 </div>
+
 
                                 <div class="block2-txt flex-w flex-t p-t-14">
                                     <div class="block2-txt-child1 flex-col-l ">
