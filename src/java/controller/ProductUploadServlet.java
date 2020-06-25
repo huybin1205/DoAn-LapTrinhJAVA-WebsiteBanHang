@@ -83,39 +83,39 @@ public class ProductUploadServlet extends HttpServlet {
                                 }
                                 break;
                             case "categoryID":
-                                temp = Integer.parseInt(item.getString("UTF-8") != "" ? item.getString() : "");
+                                temp = Integer.parseInt(item.getString("UTF-8") != "" ? item.getString("UTF-8") : "");
                                 p.setCategoryID(temp);
                                 break;
                             case "producerID":
-                                temp = Integer.parseInt(item.getString() != "" ? item.getString() : "");
+                                temp = Integer.parseInt(item.getString() != "" ? item.getString("UTF-8") : "");
                                 p.setProducerID(temp);
                                 break;
                             case "productName":
-                                tempString = item.getString() != "" ? item.getString() : "";
+                                tempString = item.getString("UTF-8") != "" ? item.getString("UTF-8") : "";
                                 p.setProductName(tempString);
                                 break;
                             case "productDescription":
-                                tempString = item.getString("UTF-8") != "" ? item.getString() : "";
+                                tempString = item.getString("UTF-8") != "" ? item.getString("UTF-8") : "";
                                 p.setProductDescription(tempString);
                                 break;
                             case "productColor":
-                                tempString = item.getString() != "" ? item.getString() : "";
+                                tempString = item.getString("UTF-8") != "" ? item.getString("UTF-8") : "";
                                 p.setProductColor(tempString);
                                 break;
                             case "productInventoryNumber":
-                                temp = Integer.parseInt(item.getString() != "" ? item.getString() : "");
+                                temp = Integer.parseInt(item.getString("UTF-8") != "" ? item.getString("UTF-8") : "");
                                 p.setInventoryNumber(temp);
                                 break;
                             case "productSize":
-                                tempString = item.getString() != "" ? item.getString() : "";
+                                tempString = item.getString("UTF-8") != "" ? item.getString("UTF-8") : "";
                                 p.setProductSize(tempString);
                                 break;
                             case "productPrice":
-                                temp = Integer.parseInt(item.getString() != "" ? item.getString() : "");
+                                temp = Integer.parseInt(item.getString("UTF-8") != "" ? item.getString("UTF-8") : "");
                                 p.setProductPrice(temp);
                                 break;
                             case "productTitle":
-                                tempString = item.getString() != "" ? item.getString() : "";
+                                tempString = item.getString("UTF-8") != "" ? item.getString("UTF-8") : "";
                                 p.setProductTitle(tempString);
                                 break;
                         }

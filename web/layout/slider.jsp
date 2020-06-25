@@ -6,8 +6,9 @@
             <% 
                 BannerDAO bannerDAO = new BannerDAO();
                 for(Banner b : bannerDAO.getBanner(constants.Constants.QUANTITY_BANNER)){
+                    String banner = b.getBannerLink().toString().replace("Images", "images");
             %>
-                <div class="item-slick1 bg-overlay1" style="background-image: url(images/<%= b.getBannerImage()%>);" data-thumb="images/<%= b.getBannerImage() %>" data-caption="<%= b.getBannerName()%>">
+                <div class="item-slick1 bg-overlay1" style="background-image: url(.<%= banner%>);" data-thumb="<%= b.getBannerImage() %>" data-caption="<%= b.getBannerName()%>">
                 <div class="container h-full">
                     <div class="flex-col-c-m h-full p-t-100 p-b-60 respon5">
                         <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
