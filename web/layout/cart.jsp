@@ -28,7 +28,7 @@
                     for (CartItem item : cart.getCart()) {
                 %>
                 <li class="header-cart-item flex-w flex-t m-b-12">
-                    <div class="header-cart-item-img">
+                    <div id="btnRemoveItemCart" class="header-cart-item-img" product-name="<%= item.getProduct().getProductName()%>" product-id="<%= item.getProduct().getProductID()%>">
                         <img src="images/<%= item.getProduct().getProductImage()%>" alt="<%= item.getProduct().getProductName()%>">
                     </div>
 
@@ -64,3 +64,28 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#btnRemoveItemCart').click(async function () {
+        var id = $(this).attr('product-id');
+        callAjax('CartServlet', 'remove', id, '1');
+        var name = $(this).attr('product-name');
+        swal(name, "have been successfully removed", "success");
+        await sleep(1500);
+        window.location.href = window.location;
+    });
+
+    function callAjax(url, command, productID, quantity) {
+        $.post('CartServlet', {'command': command, 'quantity': quantity, 'productID': productID}, function (data) {
+            if (data === 'success') {
+                console.log(data);
+            } else {
+                swal('Cart', "An error occurred", "error");
+            }
+        });
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+</script>
